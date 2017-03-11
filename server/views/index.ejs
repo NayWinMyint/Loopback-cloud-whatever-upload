@@ -1,0 +1,154 @@
+<!--
+@Author: Nay Win Myint <naywinmyint>
+@Date:   2017-03-11T11:09:20+00:00
+@Email:  naywinmyint@me.com
+@Project: Loopback Cloud Whatever Upload
+@Last modified by:   naywinmyint
+@Last modified time: 2017-03-11T18:45:59+00:00
+@Copyright: Nay Win Myint | 2017
+-->
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="naywinmyint">
+  <link rel="icon" href="../../favicon.ico">
+
+  <title>
+    <%= title %>
+  </title>
+
+  <!-- Bootstrap styles -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+  <!-- Generic page styles -->
+  <link rel="stylesheet" href="css/app.css">
+  <!-- CSS to style the file input field as button and adjust the Bootstrap progress bars -->
+  <link rel="stylesheet" href="plugins/jquery-file-upload/jquery.fileupload.css">
+</head>
+
+<body>
+
+  <nav class="navbar navbar-toggleable-md navbar-inverse fixed-top bg-inverse">
+      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <a class="navbar-brand" href="#">Navbar</a>
+
+      <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Link</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link disabled" href="#">Disabled</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+            <div class="dropdown-menu" aria-labelledby="dropdown01">
+              <a class="dropdown-item" href="#">Action</a>
+              <a class="dropdown-item" href="#">Another action</a>
+              <a class="dropdown-item" href="#">Something else here</a>
+            </div>
+          </li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0">
+          <input class="form-control mr-sm-2" type="text" placeholder="Search">
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+      </div>
+    </nav>
+
+  <!-- Begin page -->
+  <div>
+
+
+
+
+    <div class="container">
+      <h1>Loopback Cloud Whatever Upload Demo</h1>
+      <br>
+      <div class="card">
+        <div class="card-block">
+          <h4 class="card-title">to Google Drive</h4>
+          <h6 class="card-subtitle mb-2 text-muted">File uploading is handled by Node.js Server-side</h6>
+          <div class="container py-4">
+            <!-- The fileinput-button span is used to style the file input field as button -->
+            <!-- <span class="btn btn-success fileinput-button"> -->
+                <!-- <i class="glyphicon glyphicon-plus"></i> -->
+                <!-- <span>Add files...</span> -->
+                <!-- The file input field used as target for the file upload widget -->
+                <input id="fileupload" type="file" name="files" multiple>
+            <!-- </span> -->
+
+            <!-- The global progress bar -->
+            <div id="progress" class="progress">
+                <div class="progress-bar progress-bar-success"></div>
+            </div>
+            <!-- The container for the uploaded files -->
+            <div id="files" class="files"></div>
+            <br>
+
+          </div>
+          <!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+          <a href="#" class="card-link">Card link</a>
+          <a href="#" class="card-link">Another link</a> -->
+        </div>
+      </div>
+
+
+
+
+
+      <br>
+
+      <hr>
+
+  </div>
+  <!-- END wrapper -->
+  <!-- Jquery -->
+  <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
+  <!-- Bootstrap -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+  <!-- The Iframe Transport is required for browsers without support for XHR file uploads -->
+  <script src="plugins/jquery-file-upload/jquery.iframe-transport.js"></script>
+  <!-- The basic File Upload plugin -->
+  <script src="plugins/jquery-file-upload/jquery.fileupload.js"></script>
+  <script>
+  /*global window, $ */
+  $(function () {
+    'use strict';
+    // Change this to the location of your server-side upload handler:
+    var url = window.location.origin + '/api/images/12334/upload';
+    $('#fileupload').fileupload({
+        url: url,
+        dataType: 'json',
+        done: function (e, data) {
+            $.each(data.result.files, function (index, file) {
+                $('<p/>').text(file.name).appendTo('#files');
+            });
+        },
+        progressall: function (e, data) {
+            var progress = parseInt(data.loaded / data.total * 100, 10);
+            $('#progress .progress-bar').css(
+                'width',
+                progress + '%'
+            );
+        }
+    }).prop('disabled', !$.support.fileInput)
+        .parent().addClass($.support.fileInput ? undefined : 'disabled');
+  });
+</script>
+</body>
+
+</html>
